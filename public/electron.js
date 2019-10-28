@@ -32,6 +32,7 @@ app.on("activate", () => {
     }
 });
 
+autoUpdater.autoDownload = true;
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
