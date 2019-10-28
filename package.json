@@ -21,13 +21,15 @@
   "dependencies": {
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
+    "electron-log": "^3.0.8",
+    "electron-updater": "^4.1.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.2"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Clonex/POS-terminal.git"
+    "type": "git",
+    "url": "https://github.com/Clonex/POS-terminal.git"
   },
   "scripts": {
     "react-start": "react-scripts start",

@@ -3,6 +3,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
+const log = require('electron-log');
+const {autoUpdater} = require("electron-updater");
 let mainWindow;
 
 function createWindow() {
@@ -29,3 +31,7 @@ app.on("activate", () => {
         createWindow();
     }
 });
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
