@@ -1,0 +1,38 @@
+.barcodeContainer {
+    border: 1px dashed;
+    border-radius: 9px;
+    padding: 10px;
+    font-size: 100px;
+    text-align: center;
+    width: 60%;
+}
+
+.barcodeContainer .barcodeHelperText {
+    font-size: 13px;
+    padding-bottom: 20px;
+}
+
+.fragtMsg .iconCircle {
+    font-size: 20px;
+    color: #d61414;
+    padding: 5px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-vh {
+    min-height: 100vh;
+}
+
+form.searchInput {
+    position: absolute;
+    top: 0px;
+}
+
+form.searchInput input {
+    padding: 5px;
+}
