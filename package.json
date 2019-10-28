@@ -15,8 +15,7 @@
     "publish": {
       "provider": "github",
       "token ": "",
-      "private": true,
-      "repo": "Clonex/POS-terminal"
+      "private": false
     }
   },
   "dependencies": {

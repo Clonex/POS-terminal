@@ -40,7 +40,7 @@ export default class ScannerPage extends React.Component {
     render(){
 		return (<div className="center full-vh">
             <form onSubmit={this.search} action="" className="searchInput">
-                <input placeholder="Fragtbrevsnummer TEEEST" ref="nr"/>
+                <input placeholder="Fragtbrevsnummer" ref="nr"/>
                 <input type="submit" value="Søg"/>
             </form>
             
