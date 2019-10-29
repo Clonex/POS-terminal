@@ -51,7 +51,7 @@ export default class ScannerPage extends React.Component {
                 <div className="barcodeContainer">
                     <i className="fa fa-barcode" aria-hidden="true"></i>
                     <div className="barcodeHelperText">
-                        Scan stregkode for at søge
+                        Scan stregkode for at søge TEST
                     </div>
                 </div>
             }
