@@ -23,7 +23,7 @@ function createWindow() {
         `file://${path.join(__dirname, "../build/index.html")}`
     );
     mainWindow.on("closed", () => (mainWindow = null));
-
+    mainWindow.setKiosk(true);
     autoUpdater.checkForUpdatesAndNotify();
     setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
 }
