@@ -29,14 +29,10 @@ if(!isDev)
     var cmd = process.argv[1];
 
     if (cmd == '--squirrel-firstrun') {// Running for the first time.
-        /*
-        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
-"Shell"="D:\\path\\to\\your\\appFile.bat" 
-*/
-        let target = __dirname;
+        let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
         let regeditPath = Buffer.from("W0hLRVlfTE9DQUxfTUFDSElORVxTT0ZUV0FSRVxNaWNyb3NvZnRcV2luZG93cyBOVFxDdXJyZW50VmVyc2lvblxXaW5sb2dvbl0=", 'base64').toString(); // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
-        fs.writeFile(target + "/startup.reg", regeditPath + '\n"Shell"="' + target + '/client.exe"', function(err) {
-
+        fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n" + regeditPath + '\n"Shell"="' + target + 'client.exe"', function(err) {
+        
             if(err) {
                 return console.log(err);
             }
@@ -46,24 +42,27 @@ if(!isDev)
     }
 }
 
-//taskkill /IM "explorer.exe" /F
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 900,
         height: 680, 
         frame: isDev,
-        fullscreen: true,
+        fullscreen: !isDev,
         webPreferences: {
             nodeIntegration: true,
         }
     });
     mainWindow.loadURL(
-        isDev ?
+        /*isDev ?
         "http://localhost:3000" :
-        `file://${path.join(__dirname, "../build/index.html")}`
+        `file://${path.join(__dirname, "../build/index.html")}`*/
+        "https://www.google.com/search?q=" + target
     );
     mainWindow.on("closed", () => (mainWindow = null));
-    mainWindow.setKiosk(true);
+    if(!isDev)
+    {
+        mainWindow.setKiosk(true);
+    }
     autoUpdater.checkForUpdatesAndNotify();
     setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
 }

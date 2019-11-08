@@ -87,7 +87,7 @@ export default class ScannerPage extends React.Component {
                     </div>
                 </div>
             }
-            <div className="version">
+            <div className="version" onClick={() => this.electron.ipcRenderer.send('app_version')}>
                 {this.state.version}
             </div>
             {
