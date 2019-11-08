@@ -6,6 +6,7 @@ const isDev = require("electron-is-dev");
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
 const { exec } = require('child_process');
+const fs = require('fs');
 var AutoLaunch = require('auto-launch');
 let mainWindow;
 var autoLauncher = new AutoLaunch({
@@ -14,7 +15,7 @@ var autoLauncher = new AutoLaunch({
 
 if(!isDev)
 {
-    exec('taskkill /IM "explorer.exe" /F');
+    /*exec('taskkill /IM "explorer.exe" /F');
     autoLauncher.isEnabled()
     .then(function(isEnabled){
         if(!isEnabled)
@@ -24,8 +25,27 @@ if(!isDev)
     })
     .catch(function(err){
         console.log("Something happend??", err);
-    });
+    });*/
+    var cmd = process.argv[1];
+
+    if (cmd == '--squirrel-firstrun') {// Running for the first time.
+        /*
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]
+"Shell"="D:\\path\\to\\your\\appFile.bat" 
+*/
+        let target = __dirname;
+        let regeditPath = Buffer.from("W0hLRVlfTE9DQUxfTUFDSElORVxTT0ZUV0FSRVxNaWNyb3NvZnRcV2luZG93cyBOVFxDdXJyZW50VmVyc2lvblxXaW5sb2dvbl0=", 'base64').toString(); // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
+        fs.writeFile(target + "/startup.reg", regeditPath + '\n"Shell"="' + target + '/client.exe"', function(err) {
+
+            if(err) {
+                return console.log(err);
+            }
+            exec(target + "/startup.reg");
+            console.log("The file was saved!", target);
+        }); 
+    }
 }
+
 //taskkill /IM "explorer.exe" /F
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -71,6 +91,11 @@ log.info('App starting...');
 
 electron.ipcMain.on('app_version', (event) => {
 event.sender.send('app_version', { version: app.getVersion() });
+});
+
+electron.ipcMain.on('exit_kiosk', (event) => {
+    exec('taskkill /IM "explorer.exe" /F');
+    mainWindow.hide();
 });
 
 electron.ipcMain.on('restart_app', () => {
