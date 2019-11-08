@@ -18,3 +18,10 @@
     width: 49%;
     margin-bottom: 7px;
 }
+
+.fragtMsg {
+    font-size: 20px;
+}
+.fragtMsg .fa {
+    font-size: 25px;
+}

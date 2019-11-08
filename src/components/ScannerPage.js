@@ -93,7 +93,7 @@ export default class ScannerPage extends React.Component {
             {
                 this.state.isUpdating ?
                 <div className="centerMsg">
-                    <img src={loaderSvg}/> Appen opdateres..
+                    <img src={loaderSvg} alt="loading"/> Appen opdateres..
                 </div>
                 : null
             }
