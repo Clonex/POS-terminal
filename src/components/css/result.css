@@ -5,6 +5,7 @@
     width: 40vw;
     border: 1px solid #dede3fbf;
     overflow: auto;
+    font-size: 20px;
 }
 
 .searchResult h2 {
