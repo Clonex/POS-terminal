@@ -19,6 +19,9 @@ function createWindow() {
         `file://${path.join(__dirname, "../build/index.html")}`
     );
     mainWindow.on("closed", () => (mainWindow = null));
+
+    autoUpdater.checkForUpdatesAndNotify();
+    setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
 }
 app.on("ready", createWindow);
 app.on("window-all-closed", () => {
@@ -32,7 +35,12 @@ app.on("activate", () => {
     }
 });
 
-autoUpdater.autoDownload = true;
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
+autoUpdater.on('update-available', () => {
+    mainWindow.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+    //mainWindow.webContents.send('update_downloaded');
+    autoUpdater.quitAndInstall();
+});
+
 log.info('App starting...');

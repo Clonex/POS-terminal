@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "main": "public/electron.js",
   "homepage": "./",
   "private": true,
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Clonex/POS-terminal.git"
+    "url": "git+https://github.com/Clonex/POS-terminal2.git"
   },
   "scripts": {
     "react-start": "react-scripts start",
