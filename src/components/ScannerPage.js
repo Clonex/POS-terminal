@@ -10,6 +10,7 @@ export default class ScannerPage extends React.Component {
         version: "",
     };
     electron = null;
+    searchTimer = null;
 
     componentDidMount() {
         document.addEventListener("keydown", this.focusSearch);
@@ -39,6 +40,15 @@ export default class ScannerPage extends React.Component {
 
     focusSearch = () => {
         this.refs.nr.focus();
+        if(this.searchTimer)
+        {
+            window.clearTimeout(this.searchTimer);
+        }
+        this.searchTimer = window.setTimeout(() => {
+            this.searchTimer = null;
+            this.search();
+        }, 100);
+
     }
 
     clearSearch = () => {
@@ -48,7 +58,10 @@ export default class ScannerPage extends React.Component {
     }
 
     search = (e) => {
-        e.preventDefault();
+        if(e)
+        {
+            e.preventDefault();
+        }
         this.setState({
             fragt: this.refs.nr.value,
             rnd: Date.now(),
