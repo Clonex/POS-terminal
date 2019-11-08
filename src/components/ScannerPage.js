@@ -1,15 +1,34 @@
 import React from 'react';
 import FragtSearch from "./FragtSearch";
 
+import loaderSvg from "./images/loader.svg";
 import "./css/search.css";
 export default class ScannerPage extends React.Component {
     state = {
-        fragt: false
+        fragt: false,
+        isUpdating: false,
+        version: "",
     };
+    electron = null;
 
     componentDidMount() {
         document.addEventListener("keydown", this.focusSearch);
         this.refs.nr.addEventListener("blur", this.clearSearch);
+
+        this.electron = window.require("electron");
+        this.syncElectron();
+    }
+
+    syncElectron(){
+        this.electron.ipcRenderer.send('app_version');
+        this.electron.ipcRenderer.on('app_version', (event, arg) => {
+            this.electron.ipcRenderer.removeAllListeners('app_version');
+            this.setState({version: arg.version});
+        });
+        this.electron.ipcRenderer.on('update_available', () => {
+            this.electron.ipcRenderer.removeAllListeners('update_available');
+            this.setState({isUpdating: true});
+        });
     }
 
     componentWillUnmount() {
@@ -51,9 +70,19 @@ export default class ScannerPage extends React.Component {
                 <div className="barcodeContainer">
                     <i className="fa fa-barcode" aria-hidden="true"></i>
                     <div className="barcodeHelperText">
-                        Scan stregkode for at søge TEST
+                        Scan stregkode for at søge
                     </div>
                 </div>
+            }
+            <div className="version">
+                {this.state.version}
+            </div>
+            {
+                this.state.isUpdating ?
+                <div className="centerMsg">
+                    <img src={loaderSvg}/> Appen opdateres..
+                </div>
+                : null
             }
         </div>);
 	}

@@ -36,3 +36,22 @@ form.searchInput {
 form.searchInput input {
     padding: 5px;
 }
+
+.version {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0.5;
+}
+
+.centerMsg {
+    position: fixed;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerMsg img {
+    height: 30px;
+}

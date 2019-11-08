@@ -10,8 +10,12 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 900,
-        height: 680,
+        height: 680, 
+        frame: isDev,
         fullscreen: true,
+        webPreferences: {
+            nodeIntegration: true,
+        }
     });
     mainWindow.loadURL(
         isDev ?
@@ -44,3 +48,11 @@ autoUpdater.on('update-downloaded', () => {
 });
 
 log.info('App starting...');
+
+electron.ipcMain.on('app_version', (event) => {
+event.sender.send('app_version', { version: app.getVersion() });
+});
+
+electron.ipcMain.on('restart_app', () => {
+    autoUpdater.quitAndInstall();
+});
