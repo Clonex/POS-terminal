@@ -1,23 +1,12 @@
 {
   "name": "client",
-  "version": "0.1.6",
+  "version": "1.1.6",
   "main": "public/electron.js",
   "homepage": "./",
-  "private": true,
   "files": [
     "**/*",
     "build/*"
   ],
-  "description": "<your project description>",
-  "author": "<author of app>",
-  "build": {
-    "appId": "com.peder.terminal",
-    "publish": {
-      "provider": "github",
-      "token ": "",
-      "private": false
-    }
-  },
   "dependencies": {
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
@@ -42,21 +31,6 @@
     "deploy": "electron-builder build --win --publish always",
     "build": "yarn react-build && yarn deploy",
     "start": "concurrently \"npx cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
