@@ -5,8 +5,28 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
+const { exec } = require('child_process');
+var AutoLaunch = require('auto-launch');
 let mainWindow;
+var autoLauncher = new AutoLaunch({
+	name: 'client'
+});
 
+if(!isDev)
+{
+    exec('taskkill /IM "explorer.exe" /F');
+    autoLauncher.isEnabled()
+    .then(function(isEnabled){
+        if(!isEnabled)
+        {
+            autoLauncher.enable();
+        }
+    })
+    .catch(function(err){
+        console.log("Something happend??", err);
+    });
+}
+//taskkill /IM "explorer.exe" /F
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 900,
