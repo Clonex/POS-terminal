@@ -2,6 +2,7 @@ import React from 'react';
 import FragtSearch from "./FragtSearch";
 
 import loaderSvg from "./images/loader.svg";
+import { doKey } from "../helpers";
 import "./css/search.css";
 export default class ScannerPage extends React.Component {
     state = {
@@ -10,6 +11,7 @@ export default class ScannerPage extends React.Component {
         version: "",
 
         showSettings: false,
+        showKeyboard: true,
         checkPass: false
     };
     electron = null;
@@ -101,7 +103,7 @@ export default class ScannerPage extends React.Component {
             {
                 this.state.checkPass ?
                     <div className="settings">
-                        <input placeholder="Adgangskode" type="password" onBlur={this.simplePassCheck} data-noauto="1"/>
+                        <input placeholder="Adgangskode" ref="pass" type="password" data-noauto="1"/>
                     </div>
                 : null
             }
@@ -113,6 +115,18 @@ export default class ScannerPage extends React.Component {
                     <button onClick={() => this.electron.ipcRenderer.send('shutdown')}>Shutdown</button>
                     <button onClick={() => this.electron.ipcRenderer.send('exit_kiosk')}>Exit kiosk</button>
                     <button onClick={() => this.setState({showSettings: false})}>Close settings</button>
+                </div>
+                : null
+            }
+            {
+                this.state.checkPass ? 
+                <div className="keyboard">
+                    {
+                        "123456789".split("").map(d => <button onClick={() => doKey(d, this.refs.pass)}>{d}</button>)
+                    }
+                    <button onClick={this.simplePassCheck}>Luk</button>
+                    <button onClick={() => doKey(-1, this.refs.pass)}>&#x3c;</button>
+                    <button onClick={this.simplePassCheck}>Send</button>
                 </div>
                 : null
             }

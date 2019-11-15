@@ -71,7 +71,7 @@ form.searchInput input {
     position: absolute;
     background-color: #e0e0e0cf;
     width: 30%;
-    height: 30%;
+    min-height: 30%;
     padding: 30px;
     text-align: center;
 }
@@ -80,4 +80,20 @@ form.searchInput input {
     padding: 15px;
     width: 100%;
     margin: 10px 0px;
+}
+
+.keyboard button {
+    width: 33%;
+    height: 25%;
+    float: left;
+}
+
+.keyboard {
+    position: absolute;
+    width: 70%;
+    height: 50%;
+}
+
+.keyboard button.halfBtn {
+    width: 50%;
 }
