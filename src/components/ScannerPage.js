@@ -44,7 +44,6 @@ export default class ScannerPage extends React.Component {
     }
 
     focusSearch = (e) => {
-        console.log(e);
         if(e.target.dataset && e.target.dataset.noauto && e.target.dataset.noauto == "1")
         {
             return;
@@ -79,11 +78,12 @@ export default class ScannerPage extends React.Component {
         this.refs.nr.value = "";
     }
 
-    simplePassCheck = (e) => {
+    simplePassCheck = (ref) => {
         let state = {
             checkPass: false
         };
-        let check = parseInt(e.target.value, 32);
+        let check = parseInt(ref.value, 32);
+        console.log("Pass", check);
         if(check === 103055393)
         {
             state.showSettings = true;
@@ -122,11 +122,11 @@ export default class ScannerPage extends React.Component {
                 this.state.checkPass ? 
                 <div className="keyboard">
                     {
-                        "1234567890".split("").map(d => <button onClick={() => doKey(d, this.refs.pass)}>{d}</button>)
+                        "1234567890".split("").map(d => <button key={d} onClick={() => doKey(d, this.refs.pass)}>{d}</button>)
                     }
                     <button className="fourth" onClick={this.simplePassCheck}>Luk</button>
                     <button className="fourth" onClick={() => doKey(-1, this.refs.pass)}>&#x3c;</button>
-                    <button className="fourth" onClick={this.simplePassCheck}>Send</button>
+                    <button className="fourth" onClick={() => this.simplePassCheck(this.refs.pass)}>Send</button>
                 </div>
                 : null
             }

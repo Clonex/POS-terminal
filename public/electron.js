@@ -95,6 +95,10 @@ electron.ipcMain.on('shutdown', (event) => {
 electron.ipcMain.on('exit_kiosk', (event) => {
     exec('C:\\Windows\\explorer.exe');//exec('taskkill /IM "explorer.exe" /F');
     mainWindow.setFullScreen(false);
+    setTimeout(() => {
+        mainWindow.setMinimumSize(200, 200);
+        mainWindow.setSize(200, 200);
+    }, 500);
 });
 
 electron.ipcMain.on('restart_app', () => {
