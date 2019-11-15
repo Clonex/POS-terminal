@@ -12,7 +12,7 @@ let mainWindow;
 let autoLauncher = new AutoLaunch({
 	name: 'client'
 });
-if(!isDev)
+if(!isDev || 1)
 {
     /*exec('taskkill /IM "explorer.exe" /F');
     autoLauncher.isEnabled()
@@ -30,16 +30,7 @@ if(!isDev)
     
     let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
     let regeditPath = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'; // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
-    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="' + target + 'client.exe"', function(err) {
-    
-        if(err) {
-            return console.log(err);
-        }
-        if (cmd === '--squirrel-firstrun') {// Running for the first time.
-            exec(target + "/startup.reg");
-        }
-        console.log("The file was saved!", target);
-    }); 
+    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="' + target + 'client.exe"', () =>{}); 
     
 }
 
@@ -89,12 +80,15 @@ autoUpdater.on('update-downloaded', () => {
 log.info('App starting...');
 
 electron.ipcMain.on('app_version', (event) => {
-event.sender.send('app_version', { version: app.getVersion() });
+    event.sender.send('app_version', { version: app.getVersion() });
+});
+electron.ipcMain.on('run_startup', (event) => {
+    exec('startup.reg');
 });
 
 electron.ipcMain.on('exit_kiosk', (event) => {
-    exec('taskkill /IM "explorer.exe" /F');
-    mainWindow.hide();
+    exec('explorer.exe');//exec('taskkill /IM "explorer.exe" /F');
+    mainWindow.setFullScreen(false);
 });
 
 electron.ipcMain.on('restart_app', () => {

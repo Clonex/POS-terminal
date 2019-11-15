@@ -6,6 +6,7 @@
     border: 1px solid #dede3fbf;
     overflow: auto;
     font-size: 20px;
+    zoom: 1.6;
 }
 
 .searchResult h2 {

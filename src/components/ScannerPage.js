@@ -8,6 +8,9 @@ export default class ScannerPage extends React.Component {
         fragt: false,
         isUpdating: false,
         version: "",
+
+        showSettings: false,
+        checkPass: false
     };
     electron = null;
     searchTimer = null;
@@ -38,7 +41,12 @@ export default class ScannerPage extends React.Component {
 
     }
 
-    focusSearch = () => {
+    focusSearch = (e) => {
+        console.log(e);
+        if(e.target.dataset && e.target.dataset.noauto && e.target.dataset.noauto == "1")
+        {
+            return;
+        }
         this.refs.nr.focus();
         if(this.searchTimer)
         {
@@ -68,6 +76,18 @@ export default class ScannerPage extends React.Component {
         });
         this.refs.nr.value = "";
     }
+
+    simplePassCheck = (e) => {
+        let state = {
+            checkPass: false
+        };
+        let check = parseInt(e.target.value, 32);
+        if(check === 103055393)
+        {
+            state.showSettings = true;
+        }
+        this.setState(state);
+    }
     
     render(){
 		return (<div className="center full-vh">
@@ -75,6 +95,26 @@ export default class ScannerPage extends React.Component {
                 <input placeholder="Fragtbrevsnummer" ref="nr"/>
                 <input type="submit" value="Søg"/>
             </form>
+            <div className="settings" onClick={() => this.setState({checkPass: !this.state.checkPass})}>
+                <div className="fa fa-cog"/>
+            </div>
+            {
+                this.state.checkPass ?
+                    <div className="settings">
+                        <input placeholder="Adgangskode" type="password" onBlur={this.simplePassCheck} data-noauto="1"/>
+                    </div>
+                : null
+            }
+            {
+                this.state.showSettings ? 
+                <div className="settingsMenu">
+                    <button onClick={() => this.electron.ipcRenderer.send('run_startup')}>Run startup.reg</button>
+                    <button onClick={() => this.electron.ipcRenderer.send('exit_kiosk')}>Exit kiosk</button>
+                    <button onClick={() => this.setState({showSettings: false})}>Close settings</button>
+                </div>
+                : null
+            }
+                
             
             {
                 this.state.fragt && this.state.fragt.length > 0 ?
@@ -87,7 +127,7 @@ export default class ScannerPage extends React.Component {
                     </div>
                 </div>
             }
-            <div className="version" onClick={() => this.electron.ipcRenderer.send('app_version')}>
+            <div className="version">
                 {this.state.version}
             </div>
             <div className="centerMsg" style={this.state.isUpdating ? {} : {display: "none"}}>

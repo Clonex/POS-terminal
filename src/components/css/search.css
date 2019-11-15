@@ -55,3 +55,29 @@ form.searchInput input {
 .centerMsg img {
     height: 30px;
 }
+
+.settings {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    font-size: 20px;
+}
+
+.settings .fa-cog {
+    opacity: 0.3;
+}
+
+.settingsMenu {
+    position: absolute;
+    background-color: #e0e0e0cf;
+    width: 30%;
+    height: 30%;
+    padding: 30px;
+    text-align: center;
+}
+
+.settingsMenu button {
+    padding: 15px;
+    width: 100%;
+    margin: 10px 0px;
+}
