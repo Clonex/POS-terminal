@@ -85,6 +85,12 @@ electron.ipcMain.on('app_version', (event) => {
 electron.ipcMain.on('run_startup', (event) => {
     exec('startup.reg');
 });
+electron.ipcMain.on('restart', (event) => {
+    exec('shutdown /r /t 0');
+});
+electron.ipcMain.on('shutdown', (event) => {
+    exec('shutdown /s /t 0');
+});
 
 electron.ipcMain.on('exit_kiosk', (event) => {
     exec('explorer.exe');//exec('taskkill /IM "explorer.exe" /F');
