@@ -30,7 +30,7 @@ if(!isDev)
     
     let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
     let regeditPath = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'; // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
-    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n" + regeditPath + '\n"Shell"="' + target + 'client.exe"', function(err) {
+    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="' + target + 'client.exe"', function(err) {
     
         if(err) {
             return console.log(err);
