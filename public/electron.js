@@ -91,6 +91,9 @@ electron.ipcMain.on('restart', (event) => {
 electron.ipcMain.on('shutdown', (event) => {
     exec('shutdown /s /t 0');
 });
+electron.ipcMain.on('check_update', (event) => {
+    autoUpdater.checkForUpdatesAndNotify();
+});
 
 electron.ipcMain.on('exit_kiosk', (event) => {
     exec('C:\\Windows\\explorer.exe');//exec('taskkill /IM "explorer.exe" /F');
