@@ -122,7 +122,7 @@ export default class ScannerPage extends React.Component {
                 this.state.checkPass ? 
                 <div className="keyboard">
                     {
-                        "1234567890".split("").map(d => <button key={d} onClick={() => doKey(d, this.refs.pass)}>{d}</button>)
+                        "1234567890".split("").map(d => <button key={d} onClick={() => requestAnimationFrame(() => doKey(d, this.refs.pass))}>{d}</button>)
                     }
                     <button className="fourth" onClick={this.simplePassCheck}>Luk</button>
                     <button className="fourth" onClick={() => doKey(-1, this.refs.pass)}>&#x3c;</button>
