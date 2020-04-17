@@ -53,7 +53,7 @@ export default class ScannerPage extends React.Component {
                     <b>Rute:</b> {name}#{d[isPalle ? "palleBilID" : "pakkeBilID"]} [{isPalle ? "palle" : "pakke"}]
                 </div>
                 <div className="inlineTest">
-                    <b>Fragtbrevsnummer:</b> {d.fragtnr}
+                    <b>Fragtnr:</b> {d.fragtnr}
                 </div>
                 <div className="inlineTest">
                     <b>Max koli vægt:</b> {d.maxAddressWeight}kg
