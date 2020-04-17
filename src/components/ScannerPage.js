@@ -6,7 +6,7 @@ import { doKey } from "../helpers";
 import "./css/search.css";
 export default class ScannerPage extends React.Component {
     state = {
-        fragt: false,
+        fragt: "BW609593",
         isUpdating: false,
         version: "",
 

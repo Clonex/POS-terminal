@@ -1,29 +1,41 @@
 .searchResult {
-    background-color: #ffffc4;
-    padding: 50px 90px;
-    border-radius: 10px;
-    width: 40vw;
-    border: 1px solid #dede3fbf;
+    
+    width: 100%;
     overflow: auto;
-    font-size: 20px;
-    zoom: 1.6;
 }
 
 .searchResult h2 {
+    font-size: 82px;
     padding-top: 0px;
-    margin-top: 0px;
+    margin: 0;
 }
 
 .searchResult .inlineTest {
-    float: left;
-    margin-right: 1%;
-    width: 49%;
+    width: 48%;
     margin-bottom: 7px;
+    font-size: 28px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .fragtMsg {
-    font-size: 20px;
+    font-size: 50px;
 }
 .fragtMsg .fa {
-    font-size: 25px;
+    font-size: 65px;
+    padding-right: 10px;
+}
+
+.resultContainer {
+    width: 90%;
+    border: 1px solid #dede3fbf;
+    background-color: #ffffc4;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.infoContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

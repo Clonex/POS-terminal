@@ -48,30 +48,31 @@ export default class ScannerPage extends React.Component {
         return (<div className="searchResult">
             <h2>{name}</h2>
             <hr/>
-            <div className="inlineTest">
-                <b>Rute</b>: {name}#{d[isPalle ? "palleBilID" : "pakkeBilID"]} [{isPalle ? "palle" : "pakke"}]
+            <div className="infoContainer">
+                <div className="inlineTest">
+                    <b>Rute:</b> {name}#{d[isPalle ? "palleBilID" : "pakkeBilID"]} [{isPalle ? "palle" : "pakke"}]
+                </div>
+                <div className="inlineTest">
+                    <b>Fragtbrevsnummer:</b> {d.fragtnr}
+                </div>
+                <div className="inlineTest">
+                    <b>Max koli vægt:</b> {d.maxAddressWeight}kg
+                </div>
+                <div className="inlineTest">
+                    <b>Addresse:</b> {d.fuldAddresse}
+                </div>
+                <div className="inlineTest">
+                    <b>Kunde:</b> {d.kunde}
+                </div>
+                <div className="inlineTest">
+                    <b>Postnr:</b> {d.postnr}
+                </div>
             </div>
-            <div className="inlineTest">
-                <b>Fragtbrevsnummer</b>: {d.fragtnr}
-            </div>
-            <div className="inlineTest">
-                <b>Max koli vægt</b>: {d.maxAddressWeight}kg
-            </div>
-            <div className="inlineTest">
-                <b>Addresse</b>: {d.fuldAddresse}
-            </div>
-            <div className="inlineTest">
-                <b>Kunde</b>: {d.kunde}
-            </div>
-            <div className="inlineTest">
-                <b>Postnr</b>: {d.postnr}
-            </div>
-
         </div>);
     }
 
     render(){
-		return (<div>
+		return (<div className="resultContainer">
            {
                this.state.data ?
                 this.fragtData()
