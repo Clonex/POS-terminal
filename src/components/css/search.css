@@ -82,21 +82,14 @@ form.searchInput input {
     margin: 10px 0px;
 }
 
-.keyboard .fakeBtn.fourth {
+.keyboard button.fourth {
     width: 22%;
 }
 
-.keyboard .fakeBtn {
+.keyboard button {
     width: 33%;
-    height: 75px;
+    height: 25%;
     float: left;
-    background-color: grey;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    margin: 1px;
-    margin-right: 0;
-    padding-top: 24px;
 }
 
 .keyboard {
@@ -105,11 +98,6 @@ form.searchInput input {
     height: 50%;
 }
 
-.keyboard .fakeBtn.halfBtn {
+.keyboard button.halfBtn {
     width: 50%;
-}
-
-.keyboard .fakeaBtn {
-    height: 20px;
-    width: 20px;
 }
