@@ -95,7 +95,7 @@ export default class ScannerPage extends React.Component {
     }
 
     render(){
-		return (<div className="resultContainer">
+		return (<div className={`resultContainer ${this.state.data && this.state.data.error ? "error" : ""}`}>
            {
                this.state.data ?
                 this.fragtData()

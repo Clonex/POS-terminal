@@ -45,3 +45,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.resultContainer.error {
+    border: 1px solid #de3f3fbf;
+    background-color: #ffc4c4;
+}
