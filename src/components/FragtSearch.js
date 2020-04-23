@@ -22,14 +22,24 @@ export default class ScannerPage extends React.Component {
     }
     
     findNumber = async (number) => {
+        if(number.length !== 8)
+        {
+            this.setState({
+                error: true,
+                code: "NOT_VALID",
+            });
+         return;   
+        }
         let data = await api("find/" + number);
         this.setState({data});
     }
+    
     fragtData = () => {
         let msgs = {
             "NO_SORT_KEY": "Addresse ikke fundet, tjek sorteringsnøgle!",
             "NO_ZIP"    : "Postnummer er uden for rutens område!",
             "NOT_FOUND" : "Fragtbrevsnummer ikke fundet!",
+            "NOT_VALID" : "Forkert nummer scannet!",
         };
         let d = this.state.data;
         if(d.error)
