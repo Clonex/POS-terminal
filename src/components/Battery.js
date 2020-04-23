@@ -20,6 +20,15 @@ export default class ScannerPage extends React.Component {
                 });
             };
         });
+        setInterval(this.getBattery, 3 * 60 * 1000);
+    }
+
+    getBattery = () => {
+        navigator.getBattery().then(battery => {
+            this.setState({
+                percent: battery.level * 100
+            });
+        });
     }
 
     
