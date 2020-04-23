@@ -27,10 +27,10 @@ export default class ScannerPage extends React.Component {
         let color = "green";
         if(this.state.percent < 25)
         {
-            color = "yellow";
+            color = "red";
         }else if(this.state.percent < 50)
         {
-            color = "red";
+            color = "yellow";
         }
 		return (<div className={"battery " + color}>
             {this.state.percent}%
