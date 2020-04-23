@@ -8,6 +8,7 @@
     font-size: 102px;
     padding-top: 0px;
     margin: 0;
+    text-align: center;
 }
 
 .searchResult .inlineTest {
@@ -16,6 +17,11 @@
     font-size: 30px;
     display: flex;
     justify-content: space-between;
+    word-break: break-all;
+}
+
+.searchResult .inlineTest b {
+    word-break: initial;
 }
 
 .fragtMsg {
