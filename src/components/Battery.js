@@ -25,7 +25,7 @@ export default class ScannerPage extends React.Component {
     
     render(){
         let color = "green";
-        if(this.state.percent < 25)
+        if(this.state.percent < 20)
         {
             color = "red";
         }else if(this.state.percent < 50)
