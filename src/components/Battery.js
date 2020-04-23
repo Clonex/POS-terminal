@@ -14,11 +14,6 @@ export default class ScannerPage extends React.Component {
             this.setState({
                 percent: battery.level * 100
             });
-            battery.onlevelchange = function () {
-                this.setState({
-                    percent: battery.level * 100
-                });
-            };
         });
         setInterval(this.getBattery, 3 * 60 * 1000);
     }
