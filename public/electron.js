@@ -7,11 +7,17 @@ const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
 const { exec } = require('child_process');
 const fs = require('fs');
+const { powerSaveBlocker } = require('electron');
 let AutoLaunch = require('auto-launch');
 let mainWindow;
 let autoLauncher = new AutoLaunch({
 	name: 'client'
 });
+
+const id = powerSaveBlocker.start('prevent-display-sleep') // Stop screen from going to sleep
+console.log(powerSaveBlocker.isStarted(id));
+
+
 if(!isDev || 1)
 {
     /*exec('taskkill /IM "explorer.exe" /F');
