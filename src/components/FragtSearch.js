@@ -22,6 +22,7 @@ export default class ScannerPage extends React.Component {
     }
     
     findNumber = async (number) => {
+        
         let koliCheck = false;
         if(number.length === 28)
         {
@@ -37,6 +38,7 @@ export default class ScannerPage extends React.Component {
             });
          return;   
         }
+        this.props.beep.play();
         let data = await api("find/" + number);
         if(data.error && koliCheck)
         {

@@ -135,9 +135,10 @@ export default class ScannerPage extends React.Component {
             }
                 
             
+                <video ref="beep" src="/includes/beep.mp3" style={{display: "none"}} />
             {
                 this.state.fragt && this.state.fragt.length > 0 ?
-                    <FragtSearch number={this.state.fragt} rnd={this.state.rnd}/>
+                    <FragtSearch number={this.state.fragt} beep={this.refs.beep} rnd={this.state.rnd}/>
                 : 
                 <div className="barcodeContainer">
                     <i className="fa fa-barcode" aria-hidden="true"></i>
