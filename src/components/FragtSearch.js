@@ -22,7 +22,12 @@ export default class ScannerPage extends React.Component {
     }
     
     findNumber = async (number) => {
-        if(number.length !== 8)
+        let koliCheck = false;
+        if(number.length === 28)
+        {
+            number = number.substring(20);
+            koliCheck = true;
+        }else if(number.length !== 8)
         {
             this.setState({
                 data: {
@@ -33,6 +38,10 @@ export default class ScannerPage extends React.Component {
          return;   
         }
         let data = await api("find/" + number);
+        if(data.error && koliCheck)
+        {
+            data.code = "NOT_VALID";
+        }
         this.setState({data});
     }
 
