@@ -78,6 +78,7 @@ app.on("activate", () => {
 autoUpdater.on('update-available', () => {
     mainWindow.webContents.send('update_available');
 });
+
 autoUpdater.on('update-downloaded', () => {
     //mainWindow.webContents.send('update_downloaded');
     autoUpdater.quitAndInstall();
@@ -88,15 +89,19 @@ log.info('App starting...');
 electron.ipcMain.on('app_version', (event) => {
     event.sender.send('app_version', { version: app.getVersion() });
 });
+
 electron.ipcMain.on('run_startup', (event) => {
     exec('startup.reg');
 });
+
 electron.ipcMain.on('restart', (event) => {
     exec('shutdown /r /t 0');
 });
+
 electron.ipcMain.on('shutdown', (event) => {
     exec('shutdown /s /t 0');
 });
+
 electron.ipcMain.on('check_update', (event) => {
     autoUpdater.checkForUpdatesAndNotify();
 });

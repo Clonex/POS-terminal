@@ -1,5 +1,6 @@
 import React from 'react';
 import FragtSearch from "./FragtSearch";
+import Battery from "./Battery";
 
 import loaderSvg from "./images/loader.svg";
 import { doKey } from "../helpers";
@@ -97,6 +98,7 @@ export default class ScannerPage extends React.Component {
                 <input placeholder="Fragtbrevsnummer" ref="nr"/>
                 <input type="submit" value="Søg"/>
             </form>
+            <Battery />
             <div className="settings" onClick={() => this.setState({checkPass: !this.state.checkPass})}>
                 <div className="fa fa-cog"/>
             </div>

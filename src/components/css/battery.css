@@ -1,0 +1,18 @@
+.battery {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    font-size: 20px;
+}
+
+.battery.green {
+    color: green;
+}
+
+.battery.red {
+    color: red;
+}
+
+.battery.yellow {
+    color: orange;
+}
