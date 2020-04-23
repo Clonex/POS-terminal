@@ -25,15 +25,17 @@ export default class ScannerPage extends React.Component {
         if(number.length !== 8)
         {
             this.setState({
-                error: true,
-                code: "NOT_VALID",
+                data: {
+                    error: true,
+                    code: "NOT_VALID",
+                },
             });
          return;   
         }
         let data = await api("find/" + number);
         this.setState({data});
     }
-    
+
     fragtData = () => {
         let msgs = {
             "NO_SORT_KEY": "Addresse ikke fundet, tjek sorteringsnøgle!",
