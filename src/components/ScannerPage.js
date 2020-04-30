@@ -133,9 +133,8 @@ export default class ScannerPage extends React.Component {
                 </div>
                 : null
             }
-                
             
-                <video ref="beep" src="/includes/beep.mp3" style={{display: "none"}} />
+                <video ref="beep" src="includes/beep.mp3" style={{display: "none"}} />
             {
                 this.state.fragt && this.state.fragt.length > 0 ?
                     <FragtSearch number={this.state.fragt} beep={this.refs.beep} rnd={this.state.rnd}/>
