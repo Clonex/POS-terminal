@@ -1,12 +1,12 @@
 .searchResult {
-    
     width: 100%;
     overflow: auto;
 }
 
 .searchResult h2 {
-    font-size: 102px;
+    font-size: 202px;
     padding-top: 0px;
+    padding-bottom: 24px;
     margin: 0;
     text-align: center;
 }
@@ -25,11 +25,11 @@
 }
 
 .fragtMsg {
-    font-size: 50px;
+    font-size: 110px;
 }
 .fragtMsg .fa {
-    font-size: 65px;
-    padding-right: 10px;
+    font-size: 155px;
+    padding-right: 20px;
 }
 
 .resultContainer {
@@ -39,7 +39,9 @@
     border-radius: 10px;
     padding: 10px;
 }
-
+.infoContainer .inlineTest {
+    font-size: 60px;
+}
 .infoContainer {
     display: flex;
     flex-wrap: wrap;
@@ -49,4 +51,8 @@
 .resultContainer.error {
     border: 1px solid #de3f3fbf;
     background-color: #ffc4c4;
+}
+
+#root {
+    cursor: none;
 }

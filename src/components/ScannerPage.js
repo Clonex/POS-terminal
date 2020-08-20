@@ -1,6 +1,5 @@
 import React from 'react';
 import FragtSearch from "./FragtSearch";
-import Battery from "./Battery";
 
 import loaderSvg from "./images/loader.svg";
 import { doKey } from "../helpers";
@@ -98,14 +97,18 @@ export default class ScannerPage extends React.Component {
                 <input placeholder="Fragtbrevsnummer" ref="nr"/>
                 <input type="submit" value="Søg"/>
             </form>
-            <Battery />
-            <div className="settings" onClick={() => this.setState({checkPass: !this.state.checkPass})}>
+            <div className="settings" onClick={() => {
+                this.setState({checkPass: !this.state.checkPass});
+                requestAnimationFrame(() => this.refs.pass.focus());
+            }}>
                 <div className="fa fa-cog"/>
             </div>
             {
                 this.state.checkPass ?
                     <div className="settings">
-                        <input placeholder="Adgangskode" ref="pass" type="password" data-noauto="1"/>
+                        <form onSubmit={() => this.simplePassCheck(this.refs.pass)}>
+                            <input placeholder="Adgangskode" ref="pass" type="password" data-noauto="1"/>
+                        </form>
                     </div>
                 : null
             }
@@ -134,10 +137,9 @@ export default class ScannerPage extends React.Component {
                 : null
             }
             
-                <video ref="beep" src="includes/beep.mp3" style={{display: "none"}} />
             {
                 this.state.fragt && this.state.fragt.length > 0 ?
-                    <FragtSearch number={this.state.fragt} beep={this.refs.beep} rnd={this.state.rnd}/>
+                    <FragtSearch number={this.state.fragt} rnd={this.state.rnd}/>
                 : 
                 <div className="barcodeContainer">
                     <i className="fa fa-barcode" aria-hidden="true"></i>
