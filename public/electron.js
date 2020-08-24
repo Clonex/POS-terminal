@@ -18,6 +18,10 @@ const id = powerSaveBlocker.start('prevent-display-sleep') // Stop screen from g
 console.log(powerSaveBlocker.isStarted(id));
 
 
+electron.dialog.showErrorBox = function(title, content) {
+    console.log(`${title}\n${content}`);
+};
+
 if(!isDev || 1)
 {
     /*exec('taskkill /IM "explorer.exe" /F');
@@ -60,8 +64,12 @@ function createWindow() {
     {
         mainWindow.setKiosk(true);
     }
-    autoUpdater.checkForUpdatesAndNotify();
-    setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
+    try {
+        autoUpdater.checkForUpdatesAndNotify();
+        setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
+    } catch (err) {
+
+    }
 }
 app.on("ready", createWindow);
 app.on("window-all-closed", () => {
