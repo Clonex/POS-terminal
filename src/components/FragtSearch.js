@@ -38,10 +38,16 @@ export default class ScannerPage extends React.Component {
             });
          return;   
         }
-        let data = await api("find/" + number);
-        if(data.error && koliCheck)
-        {
-            data.code = "NOT_VALID";
+        let data = {};
+        try {
+            data = await api("find/" + number);
+            if(data.error && koliCheck)
+            {
+                data.code = "NOT_VALID";
+            }
+        } catch (error) {
+            data.error = true;
+            data.code = "NO_WIFI";
         }
         this.setState({data});
     }
@@ -52,6 +58,7 @@ export default class ScannerPage extends React.Component {
             "NO_ZIP"    : "Postnummer er uden for rutens område!",
             "NOT_FOUND" : "Fragtbrevsnummer ikke fundet!",
             "NOT_VALID" : "Forkert nummer scannet!",
+            "NO_WIFI" : "Dårlig forbindelse!",
         };
         let d = this.state.data;
         if(d.error)
@@ -94,7 +101,7 @@ export default class ScannerPage extends React.Component {
     }
 
     render(){
-		return (<div className={`resultContainer ${this.state.data && this.state.data.error ? "error" : ""}`}>
+		return (<div className={`resultContainer ${this.state.data && this.state.data.error ? (this.state.data.code === "NO_WIFI" ? "wifiError" : "error") : ""}`}>
            {
                this.state.data ?
                 this.fragtData()

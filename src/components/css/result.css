@@ -53,6 +53,11 @@
     background-color: #ffc4c4;
 }
 
+.resultContainer.wifiError {
+    border: 1px solid #3f86debf;
+    background-color: #c4e6ff;
+}
+
 #root {
     cursor: none;
 }
