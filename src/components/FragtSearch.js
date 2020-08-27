@@ -74,10 +74,19 @@ export default class ScannerPage extends React.Component {
         }
         let isPalle = d.maxAddressWeight > d.pakkeWeight;
         let name = d[isPalle ? "palleNavn" : "pakkeNavn"];
+        let port = d[isPalle ? "pallePort" : "pakkePort"];
         return (<div className="searchResult">
-            <h2>{name}</h2>
+            <h2>Port {port}</h2>
             <hr/>
             <div className="infoContainer">
+                <div className="inlineTest">
+                    <b>Tur:</b> {name}
+                </div>
+                <div className="inlineTest">
+                    <b>Fragtnr:</b> {d.fragtnr}
+                </div>
+            </div>
+            {/* <div className="infoContainer">
                 <div className="inlineTest">
                     <b>Rute:</b> {name}#{d[isPalle ? "palleBilID" : "pakkeBilID"]} [{isPalle ? "palle" : "pakke"}]
                 </div>
@@ -96,7 +105,7 @@ export default class ScannerPage extends React.Component {
                 <div className="inlineTest">
                     <b>Postnr:</b> {d.postnr}
                 </div>
-            </div>
+            </div> */}
         </div>);
     }
 
