@@ -71,10 +71,19 @@ export default class ScannerPage extends React.Component {
         {
             e.preventDefault();
         }
-        this.setState({
-            fragt: this.refs.nr.value,
-            rnd: Date.now(),
-        });
+        const fragt = this.refs.nr.value;
+        if(fragt === "restart")
+        {
+            this.electron.ipcRenderer.send('restart');
+        }else if(fragt === "shutdown")
+        {
+            this.electron.ipcRenderer.send('shutdown');
+        }else{
+            this.setState({
+                fragt,
+                rnd: Date.now(),
+            });
+        }
         this.refs.nr.value = "";
     }
 
