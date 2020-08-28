@@ -76,16 +76,11 @@ export default class ScannerPage extends React.Component {
         let name = d[isPalle ? "palleNavn" : "pakkeNavn"];
         let port = d[isPalle ? "pallePort" : "pakkePort"];
         return (<div className="searchResult">
-            <h2>Port {port}</h2>
-            <hr/>
-            <div className="infoContainer">
-                <div className="inlineTest">
-                    <b>Tur:</b> {name}
-                </div>
-                <div className="inlineTest">
-                    <b>Fragtnr:</b> {d.fragtnr}
-                </div>
-            </div>
+            {
+                port && <h2>Port {port}</h2>
+            }
+            <h2>{name}</h2>
+            <h2>{d.fragtnr}</h2>
             {/* <div className="infoContainer">
                 <div className="inlineTest">
                     <b>Rute:</b> {name}#{d[isPalle ? "palleBilID" : "pakkeBilID"]} [{isPalle ? "palle" : "pakke"}]

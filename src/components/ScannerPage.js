@@ -72,10 +72,10 @@ export default class ScannerPage extends React.Component {
             e.preventDefault();
         }
         const fragt = this.refs.nr.value;
-        if(fragt === "restart")
+        if(fragt === "porestartpo")
         {
             this.electron.ipcRenderer.send('restart');
-        }else if(fragt === "shutdown")
+        }else if(fragt === "poshutdownpo")
         {
             this.electron.ipcRenderer.send('shutdown');
         }else{
