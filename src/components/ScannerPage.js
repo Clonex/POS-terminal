@@ -72,10 +72,10 @@ export default class ScannerPage extends React.Component {
             e.preventDefault();
         }
         const fragt = this.refs.nr.value;
-        if(fragt === "9990791802999") //Restart
+        if(fragt.toLowerCase() === "porestartpo") //Restart
         {
             this.electron.ipcRenderer.send('restart');
-        }else if(fragt === "9990791002999") //Shutdown
+        }else if(fragt.toLowerCase() === "poshutdownpo") //Shutdown
         {
             this.electron.ipcRenderer.send('shutdown');
         }else{
