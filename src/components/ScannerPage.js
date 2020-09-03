@@ -72,10 +72,10 @@ export default class ScannerPage extends React.Component {
             e.preventDefault();
         }
         const fragt = this.refs.nr.value;
-        if(fragt === "PO-000000000000000000791802-PO") //Restart
+        if(fragt === "9990791802999") //Restart
         {
             this.electron.ipcRenderer.send('restart');
-        }else if(fragt === "PO-000000000000000000890776-PO") //Shutdown
+        }else if(fragt === "9990791002999") //Shutdown
         {
             this.electron.ipcRenderer.send('shutdown');
         }else{
