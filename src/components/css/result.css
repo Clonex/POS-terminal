@@ -4,7 +4,7 @@
 }
 
 .searchResult h2 {
-    font-size: 202px;
+    font-size: 16.7vw;
     padding-top: 0px;
     padding-bottom: 24px;
     margin: 0;
@@ -25,10 +25,10 @@
 }
 
 .fragtMsg {
-    font-size: 5em;
+    font-size: 9.5vw;
 }
 .fragtMsg .fa {
-    font-size: 155px;
+    font-size: 13vw;
     padding-right: 20px;
 }
 
