@@ -22,7 +22,7 @@ export default class ScannerPage extends React.Component {
     }
     
     findNumber = async (number) => {
-        
+        console.log("Search", number);
         let koliCheck = false;
         if(number.length === 28)
         {
