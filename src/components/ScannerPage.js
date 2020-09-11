@@ -125,6 +125,7 @@ export default class ScannerPage extends React.Component {
                 this.state.showSettings ? 
                 <div className="settingsMenu">
                     <button onClick={() => this.electron.ipcRenderer.send('run_startup')}>Run startup.reg</button>
+                    <button onClick={() => this.electron.ipcRenderer.send('run_enable')}>Re-enable explorer</button>
                     <button onClick={() => this.electron.ipcRenderer.send('restart')}>Restart</button>
                     <button onClick={() => this.electron.ipcRenderer.send('shutdown')}>Shutdown</button>
                     <button onClick={() => this.electron.ipcRenderer.send('check_update')}>Force update check</button>

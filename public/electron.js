@@ -42,6 +42,10 @@ if(!isDev || 1)
     let regeditPath = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'; // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
     fs.writeFile(target + "startup.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="' + target + 'client.exe"\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI\\SessionData]\n"AllowLockScreen"=dword:00000000\n[-HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU]\n\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU]\n"NoAutoUpdate"=dword:00000001', () =>{}); 
     
+    target = (path.resolve("./") + "\\").split("\\").join("\\"+"\\");
+    regeditPath = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon'; // [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon]   
+    fs.writeFile(target + "enable.reg", "Windows Registry Editor Version 5.00\n\n[" + regeditPath + ']\n"Shell"="explorer.exe"', () =>{}); 
+    
 }
 
 function createWindow() {
@@ -100,6 +104,10 @@ electron.ipcMain.on('app_version', (event) => {
 
 electron.ipcMain.on('run_startup', (event) => {
     exec('startup.reg');
+});
+
+electron.ipcMain.on('run_enable', (event) => {
+    exec('enable.reg');
 });
 
 electron.ipcMain.on('restart', (event) => {
