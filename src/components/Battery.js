@@ -1,10 +1,6 @@
 import React from 'react';
-import FragtSearch from "./FragtSearch";
-
-import loaderSvg from "./images/loader.svg";
-import { doKey } from "../helpers";
 import "./css/battery.css";
-export default class ScannerPage extends React.Component {
+export default class Battery extends React.Component {
     state = {
         percent: 100,
     };
@@ -25,7 +21,6 @@ export default class ScannerPage extends React.Component {
             });
         });
     }
-
     
     render(){
         let color = "green";

@@ -1,5 +1,7 @@
 import React from 'react';
 import FragtSearch from "./FragtSearch";
+import Battery from "./Battery";
+
 
 import loaderSvg from "./images/loader.svg";
 import { doKey } from "../helpers";
@@ -72,6 +74,10 @@ export default class ScannerPage extends React.Component {
             e.preventDefault();
         }
         const fragt = this.refs.nr.value;
+        if(fragt.length === 0)
+        {
+            return;
+        }
         if(fragt.toLowerCase() === "porestartpo") //Restart
         {
             this.electron.ipcRenderer.send('restart');
@@ -106,6 +112,7 @@ export default class ScannerPage extends React.Component {
                 <input placeholder="Fragtbrevsnummer" ref="nr"/>
                 <input type="submit" value="Søg"/>
             </form>
+            <Battery/>
             <div className="settings" onClick={() => {
                 this.setState({checkPass: !this.state.checkPass});
                 requestAnimationFrame(() => this.refs.pass.focus());
