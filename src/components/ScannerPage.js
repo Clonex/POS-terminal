@@ -28,7 +28,7 @@ export default class ScannerPage extends React.Component {
 
         this.electron = window.require("electron");
         this.syncElectron();
-        // this.setupNew();
+        this.setupNew();
     }
 
 
