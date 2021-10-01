@@ -22,32 +22,45 @@ export default class ScannerPage extends React.Component {
     }
     
     findNumber = async (number) => {
-        console.log("Search", number);
-        let koliCheck = false;
-        if(number.length === 28)
-        {
-            number = number.substring(20);
-            koliCheck = true;
-        }else if(number.length !== 8)
-        {
-            this.setState({
-                data: {
-                    error: true,
-                    code: "NOT_VALID",
-                },
-            });
-         return;   
-        }
+        // console.log("Search", number);
+        
         let data = {};
-        try {
-            data = await api("find/" + number);
-            if(data.error && koliCheck)
+        if(this.props.useLocal && this.props.store)
+        {
+            // console.log("Ranke", number, this.props.store[number]);
+            data.ranke = this.props.store[number];
+            if(!data.ranke)
             {
-                data.code = "NOT_VALID";
+                data.error = true;
+                data.code = "NOT_FOUND";
             }
-        } catch (error) {
-            data.error = true;
-            data.code = "NO_WIFI";
+            // return;
+        }else{
+            let koliCheck = false;
+            if(number.length === 28)
+            {
+                number = number.substring(20);
+                koliCheck = true;
+            }else if(number.length !== 8)
+            {
+                this.setState({
+                    data: {
+                        error: true,
+                        code: "NOT_VALID",
+                    },
+                });
+            return;   
+            }
+            try {
+                data = await api("find/" + number);
+                if(data.error && koliCheck)
+                {
+                    data.code = "NOT_VALID";
+                }
+            } catch (error) {
+                data.error = true;
+                data.code = "NO_WIFI";
+            }
         }
         this.setState({data});
     }
@@ -56,7 +69,7 @@ export default class ScannerPage extends React.Component {
         let msgs = {
             "NO_SORT_KEY": "Addresse ikke fundet, tjek sorteringsnøgle!",
             "NO_ZIP"    : "Postnummer er uden for rutens område!",
-            "NOT_FOUND" : "Fragtbrevsnummer ikke fundet!",
+            "NOT_FOUND" : "Nummeret blev ikke fundet!",
             "NOT_VALID" : "Forkert nummer scannet!",
             "NO_WIFI" : "Dårlig forbindelse!",
         };
@@ -72,6 +85,14 @@ export default class ScannerPage extends React.Component {
                 }
             </div>);
         }
+
+        if(this.props.useLocal)
+        {
+            return (<div className="searchResult">
+                <h2 style={{fontSize: "158px"}}>{d.ranke}</h2>
+            </div>);
+        }
+
         let isPalle = d.maxAddressWeight > d.pakkeWeight;
         let name = d[isPalle ? "palleNavn" : "pakkeNavn"];
         let port = d[isPalle ? "pallePort" : "pakkePort"];
