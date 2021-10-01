@@ -29,7 +29,7 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "electron-build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish always",
+    "deploy": "npx cross-env GH_TOKEN=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 electron-builder build --win --publish always",
     "build": "yarn react-build && yarn deploy",
     "start": "concurrently \"npx cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
