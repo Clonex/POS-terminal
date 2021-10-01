@@ -31,8 +31,14 @@ export default class ScannerPage extends React.Component {
             data.ranke = this.props.store[number];
             if(!data.ranke)
             {
-                data = await api("findNew/" + number);
-                // data.error = true;
+                const temp = await api("findNew/" + number);
+                if(temp && !temp.error)
+                {
+                    data = temp.data;
+                }else{
+                    data.error = true;
+                    data.code = "NO_WIFI";
+                }
                 // data.code = "NOT_FOUND";
             }
             // return;
@@ -89,6 +95,7 @@ export default class ScannerPage extends React.Component {
 
         if(this.props.useLocal)
         {
+            console.log("Local", d);
             return (<div className="searchResult">
                 <h2 style={{fontSize: "158px"}}>{d.ranke}</h2>
             </div>);
