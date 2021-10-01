@@ -69,8 +69,8 @@ function createWindow() {
         mainWindow.setKiosk(true);
     }
     try {
-        autoUpdater.checkForUpdatesAndNotify();
-        setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
+        // autoUpdater.checkForUpdatesAndNotify();
+        // setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
     } catch (err) {
 
     }
@@ -92,7 +92,6 @@ autoUpdater.on('update-available', () => {
 });
 
 autoUpdater.on('update-downloaded', () => {
-    //mainWindow.webContents.send('update_downloaded');
     autoUpdater.quitAndInstall();
 });
 
