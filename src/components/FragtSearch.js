@@ -31,8 +31,9 @@ export default class ScannerPage extends React.Component {
             data.ranke = this.props.store[number];
             if(!data.ranke)
             {
-                data.error = true;
-                data.code = "NOT_FOUND";
+                data = await api("findNew/" + number);
+                // data.error = true;
+                // data.code = "NOT_FOUND";
             }
             // return;
         }else{
