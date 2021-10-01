@@ -4,7 +4,7 @@ import Battery from "./Battery";
 
 
 import loaderSvg from "./images/loader.svg";
-import { doKey } from "../helpers";
+import { doKey, api } from "../helpers";
 import "./css/search.css";
 export default class ScannerPage extends React.Component {
     state = {
@@ -14,10 +14,13 @@ export default class ScannerPage extends React.Component {
 
         showSettings: false,
         showKeyboard: true,
-        checkPass: false
+        checkPass: false,
+        lastSync: false,
+        isNew: false,
     };
     electron = null;
     searchTimer = null;
+    lookupTable = {};
 
     componentDidMount() {
         document.addEventListener("keydown", this.focusSearch);
@@ -25,6 +28,29 @@ export default class ScannerPage extends React.Component {
 
         this.electron = window.require("electron");
         this.syncElectron();
+        // this.setupNew();
+    }
+
+
+    setupNew()
+    {
+        this.setState({
+            isNew: true
+        });
+        this.syncTable();
+        setInterval(() => this.syncTable(), 1000 * 60 * 15);
+    }
+
+    async syncTable()
+    {
+        const data = await api("getKolis");
+        if(data && !data.error && Object.keys(data.data).length > 0)
+        {
+            this.lookupTable = data.data;
+            this.setState({
+                lastSync: Date.now(),
+            });
+        }
     }
 
     syncElectron(){
@@ -156,7 +182,7 @@ export default class ScannerPage extends React.Component {
             
             {
                 this.state.fragt && this.state.fragt.length > 0 ?
-                    <FragtSearch number={this.state.fragt} rnd={this.state.rnd}/>
+                    <FragtSearch number={this.state.fragt} rnd={this.state.rnd} useLocal={this.state.isNew} store={this.lookupTable}/>
                 : 
                 <div className="barcodeContainer">
                     <i className="fa fa-barcode" aria-hidden="true"></i>
@@ -166,7 +192,7 @@ export default class ScannerPage extends React.Component {
                 </div>
             }
             <div className="version">
-                {this.state.version}
+                {this.state.version} {this.state.lastSync && " - " + (new Date(this.state.lastSync).toLocaleTimeString())}
             </div>
             <div className="centerMsg" style={this.state.isUpdating ? {} : {display: "none"}}>
                 <img src={loaderSvg} alt="loading"/> Appen opdateres..
