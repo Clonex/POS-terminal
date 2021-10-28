@@ -31,8 +31,21 @@ export default class ScannerPage extends React.Component {
             data.ranke = this.props.store[number];
             if(!data.ranke)
             {
-                data.error = true;
-                data.code = "NOT_FOUND";
+                const temp = await api("findNew/" + number);
+                if(temp)
+                {
+                    if(temp.error)
+                    {
+                        data.error = true;
+                        data.code = temp.code;
+                    }else{
+                        data = temp.data;
+                    }
+                }else{
+                    data.error = true;
+                    data.code = "NO_WIFI";
+                }
+                // data.code = "NOT_FOUND";
             }
             // return;
         }else{
@@ -72,6 +85,7 @@ export default class ScannerPage extends React.Component {
             "NOT_FOUND" : "Nummeret blev ikke fundet!",
             "NOT_VALID" : "Forkert nummer scannet!",
             "NO_WIFI" : "Dårlig forbindelse!",
+            "WEIRD_BUG" : "Der skete en fejl!",
         };
         let d = this.state.data;
         if(d.error)
@@ -81,7 +95,7 @@ export default class ScannerPage extends React.Component {
                     <i className="fa fa-times" aria-hidden="true"/>
                 </div>
                 {
-                    msgs[d.code]
+                    msgs[d.code] ? msgs[d.code] : msgs["WEIRD_BUG"]
                 }
             </div>);
         }
