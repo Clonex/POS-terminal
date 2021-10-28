@@ -69,8 +69,8 @@ function createWindow() {
         mainWindow.setKiosk(true);
     }
     try {
-        // autoUpdater.checkForUpdatesAndNotify();
-        // setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
+        autoUpdater.checkForUpdatesAndNotify();
+        setInterval(() => autoUpdater.checkForUpdatesAndNotify(), 120000);
     } catch (err) {
 
     }
